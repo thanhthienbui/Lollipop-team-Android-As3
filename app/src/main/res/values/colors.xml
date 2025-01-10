@@ -15,4 +15,5 @@
     <color name="text_purple">#6A5ACD</color>
     <color name="button_purple">#E6E6FA</color>
     <color name="light_purple_border">#E6E6FA</color>
+    <color name="icon_red">#FF0000</color>
 </resources>

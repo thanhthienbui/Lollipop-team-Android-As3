@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    
-    <!-- Hộp quà phía dưới -->
-    <path
-        android:fillColor="@color/gift_brown"
-        android:pathData="M20,12v8c0,1.1-0.9,2-2,2H6c-1.1,0-2-0.9-2-2v-8"/>
-        
-    <!-- Hộp quà phía trên -->
-    <path
-        android:fillColor="@color/gift_brown"
-        android:pathData="M22,8v2c0,1.1-0.9,2-2,2H4c-1.1,0-2-0.9-2-2V8c0-1.1,0.9-2,2-2h16C21.1,6,22,6.9,22,8z"/>
-        
-    <!-- Dải ruy băng dọc -->
-    <path
-        android:fillColor="@color/gift_green"
-        android:pathData="M13,22V6"/>
-        
-    <!-- Dải ruy băng ngang -->
-    <path
-        android:fillColor="@color/gift_green"
-        android:pathData="M4,12h16"/>
-        
-    <!-- Nơ phía trên -->
-    <path
-        android:fillColor="@color/gift_green"
-        android:pathData="M12,6c0,0-3-4-3-5c0-1.1,0.9-2,2-2s2,0.9,2,2c0-1.1,0.9-2,2-2s2,0.9,2,2c0,1-3,5-3,5"/>
-</vector> 
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/light_purple_border" />
+            <size android:width="108dp" android:height="108dp"/>
+        </shape>
+    </item>
+    <!-- Icon -->
+    <item android:gravity="center">
+        <vector
+            android:width="72dp"
+            android:height="72dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <!-- Giữ nguyên các path hiện có -->
+            <path
+                android:fillColor="@color/gift_brown"
+                android:pathData="M20,12v8c0,1.1-0.9,2-2,2H6c-1.1,0-2-0.9-2-2v-8"/>
+            <path
+                android:fillColor="@color/gift_brown"
+                android:pathData="M22,8v2c0,1.1-0.9,2-2,2H4c-1.1,0-2-0.9-2-2V8c0-1.1,0.9-2,2-2h16C21.1,6,22,6.9,22,8z"/>
+            <path
+                android:fillColor="@color/gift_green"
+                android:pathData="M13,22V6"/>
+            <path
+                android:fillColor="@color/gift_green"
+                android:pathData="M4,12h16"/>
+            <path
+                android:fillColor="@color/gift_green"
+                android:pathData="M12,6c0,0-3-4-3-5c0-1.1,0.9-2,2-2s2,0.9,2,2c0-1.1,0.9-2,2-2s2,0.9,2,2c0,1-3,5-3,5"/>
+        </vector>
+    </item>
+</layer-list> 
