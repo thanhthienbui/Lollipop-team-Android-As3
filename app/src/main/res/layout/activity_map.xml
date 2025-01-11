@@ -5,22 +5,17 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Back" />
-
+    <!-- Title -->
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:text="Location for dating"
+        android:textSize="24sp"
         android:textColor="#FF4081"
-        android:textSize="24sp" />
+        android:layout_marginBottom="16dp"/>
 
+    <!-- MapView -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -31,38 +26,53 @@
             android:layout_height="match_parent"/>
     </FrameLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <!-- Search Bar -->
+    <SearchView
+        android:id="@+id/searchBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:queryHint="Search for places..."
+        android:iconifiedByDefault="false"/>
 
-        <EditText
-            android:id="@+id/searchBox"
-            android:layout_width="353dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/search_box_border"
-            android:hint="Explore nearby"
-            android:padding="8dp"
-            android:textColor="#000" />
+    <!-- Venue Type Filter (RadioGroup) -->
+    <RadioGroup
+        android:id="@+id/venueTypeGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+        <RadioButton
+            android:id="@+id/restaurant"
+            android:text="Restaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/cafe"
+            android:text="Cafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/hotel"
+            android:text="Hotel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
 
-    </LinearLayout>
-
+    <!-- Location Details -->
     <TextView
         android:id="@+id/locationDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Baozi restaurant"
+        android:text="Location: "
         android:textSize="18sp"
-        android:layout_marginTop="16dp"
-        android:textColor="#000"/>
+        android:textColor="#000"
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="106 Hai Ba Trung, Dakao, District 1"
+        android:text="Address: "
         android:textSize="14sp"
         android:textColor="#888"/>
 
@@ -70,7 +80,7 @@
         android:id="@+id/rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Rating: ★★★★☆"
+        android:text="Rating: "
         android:textSize="14sp"
         android:textColor="#000"/>
 </LinearLayout>
