@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Back" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Location for dating"
+        android:textColor="#FF4081"
+        android:textSize="24sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/searchBox"
+            android:layout_width="353dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/search_box_border"
+            android:hint="Explore nearby"
+            android:padding="8dp"
+            android:textColor="#000" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/locationDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Baozi restaurant"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="106 Hai Ba Trung, Dakao, District 1"
+        android:textSize="14sp"
+        android:textColor="#888"/>
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rating: ★★★★☆"
+        android:textSize="14sp"
+        android:textColor="#000"/>
+</LinearLayout>
