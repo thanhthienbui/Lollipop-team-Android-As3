@@ -1,14 +1,20 @@
 package com.example.relationshipapp;  // Adjust this to your actual package name
 
+import android.Manifest;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,6 +27,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.example.relationshipapp.Location;
+import com.example.relationshipapp.database.DatabaseHelper;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +42,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private RadioGroup venueTypeGroup;
     private FusedLocationProviderClient fusedLocationClient;
 
-
-
     private List<Location> locations = new ArrayList<>();  // Unified list for all location types
+
+    // Rating and Review System UI components
+    private RatingBar ratingBar;
+    private EditText reviewEditText;
+    private Button saveReviewButton;
+    private String currentLocationName;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private DatabaseHelper databaseHelper;  // SQLite database helper to handle reviews
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +65,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         searchBox = findViewById(R.id.searchBox);
         venueTypeGroup = findViewById(R.id.venueTypeGroup);
 
+        // Initialize Rating/Review components
+        ratingBar = findViewById(R.id.ratingBar);
+        reviewEditText = findViewById(R.id.reviewEditText);
+        saveReviewButton = findViewById(R.id.saveReviewButton);
+
         // Initialize the FusedLocationProviderClient to get the user's location
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        // Initialize the Database Helper for review storage
+        databaseHelper = new DatabaseHelper(this);
 
         // Initialize the MapView
         mapView.onCreate(savedInstanceState);
@@ -86,6 +109,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 return false;
             }
         });
+
+        // Save Review button functionality
+        saveReviewButton.setOnClickListener(v -> {
+            if (currentLocationName != null) {
+                float rating = ratingBar.getRating();
+                String review = reviewEditText.getText().toString();
+
+                if (!review.isEmpty()) {
+                    saveReview(currentLocationName, rating, review);
+                    Toast.makeText(MapActivity.this, "Review Saved!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MapActivity.this, "Please enter a review", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void initLocations() {
@@ -106,12 +144,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // Initially show all markers (restaurants, cafes, hotels)
         showAllMarkers();
 
-        // Automatically show details for the first marker (restaurant)
-        if (!locations.isEmpty()) {
-            Marker firstMarker = googleMap.addMarker(new MarkerOptions().position(locations.get(0).getLatLng()).title(locations.get(0).getName()));
-            firstMarker.setTag(locations.get(0));  // Tag the marker with the location object
-            updateLocationDetails(firstMarker);  // Update details based on the first marker
-        }
+        // Set an OnMarkerClickListener to update location details when a marker is clicked
+        googleMap.setOnMarkerClickListener(marker -> {
+            updateLocationDetails(marker);  // Update details based on the clicked marker
+            currentLocationName = marker.getTitle();  // Store the name of the clicked location
+            loadReview(currentLocationName);  // Load the existing review (if any)
+            return true;  // Ensures that the event is consumed
+        });
 
         // Get the user's location and zoom the map
         getUserLocation();
@@ -135,7 +174,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    // Method to update location details (called when a marker is clicked or initialized)
     private void updateLocationDetails(Marker marker) {
         Location location = (Location) marker.getTag();  // Get the location details from the marker's tag
         locationDetails.setText("Location: " + marker.getTitle());
@@ -153,13 +191,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    // Get the user's current location and zoom the map
     private void getUserLocation() {
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
             return;
         }
+
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, location -> {
                     if (location != null) {
@@ -170,6 +208,36 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         Toast.makeText(MapActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    // Method to save the review and rating for the current location
+    private void saveReview(String locationName, float rating, String review) {
+        // Save the review to the database
+        databaseHelper.insertReview(locationName, rating, review);  // Insert the new review into the database
+        Toast.makeText(this, "Review Saved!", Toast.LENGTH_SHORT).show();
+    }
+
+    // Method to load the existing review and rating for the current location
+    private void loadReview(String locationName) {
+        Cursor cursor = databaseHelper.getReview(locationName);  // Get review from the database using the location name
+        if (cursor.moveToFirst()) {
+            // If a review exists, set the rating and review text in UI
+            try {
+                // Use getColumnIndexOrThrow to avoid potential issues with missing columns
+                float rating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
+                String review = cursor.getString(cursor.getColumnIndexOrThrow("review"));
+
+                ratingBar.setRating(rating);  // Set the rating on the RatingBar
+                reviewEditText.setText(review);  // Set the review text in the EditText
+            } catch (Exception e) {
+                // Handle exception if the column doesn't exist
+                Toast.makeText(MapActivity.this, "Error loading review", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            // If no review exists, set default values (0 rating and empty review)
+            ratingBar.setRating(0);
+            reviewEditText.setText("");
+        }
     }
 
     @Override
