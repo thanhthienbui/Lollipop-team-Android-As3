@@ -25,7 +25,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <activity
-            android:name=".MainActivity"
+            android:name=".GiftPageActivity"
             android:exported="false" />
         <activity
             android:name=".MapActivity"
