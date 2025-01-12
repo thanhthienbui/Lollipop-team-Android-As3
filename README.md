@@ -12,8 +12,11 @@ Application: Blood Donation App - S3978908
 Github repo: https://github.com/thanhthienbui/Lollipop-team-Android-As3.git
 
 Team members: Le Tuan Khai - s3978908
+
 		Ngo Tra Tam Khoa - s3978419
+  
 		Huynh Bao Khang - s3911723
+  
 		Bui Hong Thanh Thien - s3878323
 
 Team: Lollipop
