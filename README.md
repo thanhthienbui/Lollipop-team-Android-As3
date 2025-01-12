@@ -15,18 +15,28 @@ Team members: Le Tuan Khai - s3978908
 Team: Lollipop
 
 Activities:
+
 LoginActivity
+
 EventTrackingActivity
+
 MapActivity
+
 GiftDetailActivity
+
 GiftPageActivity
 
 Other java classes:
+
 GiftPageAdapter.java
+
 Location
 
+
 Database folder:
+
 DatabaseHelper.java
+
 NotesDbHelper.java
 
 
@@ -36,7 +46,9 @@ NotesDbHelper.java
 Functionality:
 MainActivity- this is the main screen where users can get access to the app, it will show the 1st anniversary on screen and display "You and Claire have been married for 365 days"
 
+
 LoginActivity is to get users an account to access the mainActivity
+
 
 GiftDetailActivity - this is the UI where users can see the lines of love sentences when each gift is being selected.
 
@@ -49,9 +61,13 @@ MapActivity - this activity will show a map with pins of locations including hot
 
 
 Roles of each members
+
 Bui Hong Thanh Thien - MapActivity and the databases that are related
+
 Le Tuan Khai - EventTrackingActivity, LoginActivity(the function provided for Thien's loginActivity UI)
+
 Ngo Tra Tam Khoa - MainActivity(HomePage)
+
 Huynh Bao Khang - GiftPageActivity, GiftDetailActivity
 
 Contribution score in %:
@@ -65,27 +81,49 @@ Huynh Bao Khang - 25%
 Technology use:
 
 SQLLite
+
 OnCompleteListener
+
 OnSuccessListener
+
 OnFailureListener
+
 AppCompatActivity
+
 RecyclerView
+
 RadioGroup
+
 RadioButton
+
 TimePicker
+
 RecyclerView
+
 Calendar
+
 Animation
+
 SimpleDateFormat
+
 gms.maps.GoogleMap
+
 PackageManager
+
 Bundle
+
 SearchView
+
 TextView
+
 Checkbox
+
 Cursor
+
 AlertDialog
+
 Notification
+
 Medium Phone API 34
 
 
