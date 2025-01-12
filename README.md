@@ -1,6 +1,10 @@
 COSC2657
 Lollipop team
 
+For LoginActivity(testing):
+Email: test@example.com
+Password: test_password
+
 
 
 Application: Blood Donation App - S3978908
@@ -129,6 +133,15 @@ AlertDialog
 Notification
 
 Medium Phone API 34
+
+OPEN ISSUES and BUGS: 
+
+LoginActivity: When the username is entered, it appeared to said that "username does not exist" when Toast. And we decided to use SQLLite instead of Firebase to sync the data. Unfortunately, the data from the username textView wasnt syncing up with the program. So it is an error that would not let us access the MainActivity.
+
+SignUpActivity: the problem is related above as well. Since the program can't take the username and password, creating one through SignUpActivity would be disastrous and would create more problematic errors that would not make the program successful to run.
+
+
+
 
 
 
