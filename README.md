@@ -7,7 +7,7 @@ Password: test_password
 
 
 
-Application: Blood Donation App - S3978908
+Application: RelationshipApp
 
 Github repo: https://github.com/thanhthienbui/Lollipop-team-Android-As3.git
 
