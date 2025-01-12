@@ -143,6 +143,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
+
     @Override
     public void onMapReady(GoogleMap map) {
         googleMap = map;
@@ -233,46 +234,36 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             String locationName = locationDetails.getText().toString(); // Use location name for filtering reviews
             Cursor cursor = databaseHelper.getAllLocations();
 
-            int locationId = -1;
+            boolean LocationFound = false;
             while (cursor != null && cursor.moveToNext()) {
-                // Ensure column indices are valid
+                // Check if the column index is valid
                 int locationNameIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_LOCATION_NAME);
-                int locationIdIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_LOCATION_ID);
-
-                // Check if either of the indices is invalid (should not be -1)
-                if (locationNameIndex == -1 || locationIdIndex == -1) {
-                    // Handle error if columns do not exist
-                    Log.e("Database Error", "Required columns not found.");
+                if (locationNameIndex == -1) {
+                    // Log or handle error: column does not exist
+                    Log.e("Database Error", "Location Name column not found");
                     break;
                 }
 
-                // If the location matches the one in the details, get its ID
+                // Check if the current location name matches the one we are reviewing
                 if (cursor.getString(locationNameIndex).equals(locationName)) {
-                    locationId = cursor.getInt(locationIdIndex);
+                    LocationFound = true;
                     break;
                 }
             }
 
-            // Close the cursor to release resources
-            if (cursor != null) {
-                cursor.close();
-            }
+            cursor.close();
 
-            // If LocationId is found, insert the review
-            if (locationId != -1) {
+            if (LocationFound) {
                 // Insert the review for the location
-                databaseHelper.insertReview(locationId, rating, reviewText);
+                databaseHelper.insertReview(locationName, rating, reviewText);
                 Toast.makeText(this, "Review saved", Toast.LENGTH_SHORT).show();
             } else {
-                // If no matching location is found
                 Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
             }
         } else {
-            // If review text is empty, prompt the user
             Toast.makeText(this, "Please enter a review", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     private void searchPlace(String query) {
         googleMap.clear();  // Clear existing markers

@@ -87,11 +87,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Insert a review into the reviews table
-    public void insertReview(int locationId, float rating, String review) {
+    // Modify this method to accept locationName instead of locationId
+    public void insertReview(String locationName, float rating, String review) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_REVIEW_LOCATION_ID, locationId);
+        values.put(COLUMN_REVIEW_LOCATION_ID, locationName);  // Save locationName instead of ID
         values.put(COLUMN_RATING, rating);
         values.put(COLUMN_REVIEW, review);
 
