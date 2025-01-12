@@ -1,0 +1,264 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location for dating"
+        android:textSize="24sp"
+        android:textColor="#FF4081"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- MapView -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+    <!-- Search Bar -->
+    <SearchView
+        android:id="@+id/searchBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search for places..."
+        android:iconifiedByDefault="false"/>
+
+    <!-- Filter Button -->
+    <Button
+        android:id="@+id/filterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        android:backgroundTint="@color/pink"
+        android:textColor="#ffffff"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Location Details -->
+    <TextView
+        android:id="@+id/locationDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Location: "
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Address: "
+        android:textSize="14sp"
+        android:textColor="#888"/>
+
+    <!-- Rating Section -->
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="0"
+        android:layout_marginTop="8dp"/>
+    <!-- Review Section -->
+    <EditText
+        android:id="@+id/reviewEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Write a review"
+        android:inputType="textMultiLine"
+        android:maxLines="5"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/saveReviewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Review" />
+
+    <!-- Filter Options (Dialog) - Will show when user clicks the filter button -->
+    <LinearLayout
+        android:id="@+id/filterOptionsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="8dp">
+
+        <!-- Venue Type Category -->
+        <TextView
+            android:id="@+id/categoryVenue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Venue Type"
+            android:textSize="18sp"
+            android:textColor="#FF4081"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/restaurant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restaurant"/>
+            <CheckBox
+                android:id="@+id/cafe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cafe"/>
+            <CheckBox
+                android:id="@+id/hotel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hotel"/>
+        </LinearLayout>
+
+        <!-- Price Range Category -->
+        <TextView
+            android:id="@+id/categoryPriceRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price Range"
+            android:textSize="18sp"
+            android:textColor="#FF4081"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/lowPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Low Price"/>
+            <CheckBox
+                android:id="@+id/mediumPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medium Price"/>
+            <CheckBox
+                android:id="@+id/highPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="High Price"/>
+        </LinearLayout>
+
+        <!-- Operating Hours Category -->
+        <TextView
+            android:id="@+id/categoryHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Operating Hours"
+            android:textSize="18sp"
+            android:textColor="#FF4081"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/openNow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open Now"/>
+            <CheckBox
+                android:id="@+id/anyTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Any Time"/>
+        </LinearLayout>
+
+        <!-- Distance Category -->
+        <TextView
+            android:id="@+id/categoryDistance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Distance"
+            android:textSize="18sp"
+            android:textColor="#FF4081"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/nearby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nearby"/>
+            <CheckBox
+                android:id="@+id/farther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Farther"/>
+        </LinearLayout>
+
+        <!-- Popularity Category -->
+        <TextView
+            android:id="@+id/categoryPopular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Popularity"
+            android:textSize="18sp"
+            android:textColor="#FF4081"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/popular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Popular"/>
+            <CheckBox
+                android:id="@+id/notPopular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not Popular"/>
+        </LinearLayout>
+
+        <!-- Apply and Cancel Buttons -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="end">
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/gray"/>
+
+            <Button
+                android:id="@+id/applyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply"
+                android:backgroundTint="@color/pink"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
