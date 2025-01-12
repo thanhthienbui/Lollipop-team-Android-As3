@@ -18,4 +18,7 @@
     <color name="icon_red">#FF0000</color>
     <color name="pink">#FF4081</color>
     <color name="gray">#9E9E9E</color>
+    <color name="red">#FFFF0000</color>
+    <color name="golden">#FFFFDD00</color>
+    <color name="light_pink">#FFFFF0F8</color>
 </resources>
