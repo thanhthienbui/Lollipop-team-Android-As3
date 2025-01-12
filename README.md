@@ -71,9 +71,13 @@ Ngo Tra Tam Khoa - MainActivity(HomePage)
 Huynh Bao Khang - GiftPageActivity, GiftDetailActivity
 
 Contribution score in %:
+
 Bui Hong Thanh Thien - 25%
+
 Le Tuan Khai - 25%
+
 Ngo Tra Tam Khoa - 25%
+
 Huynh Bao Khang - 25%
 
 
