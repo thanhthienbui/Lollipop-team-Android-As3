@@ -4,4 +4,6 @@
     <string name="welcome"> Welcome <font color="@color/red">Rae</font>!</string>
 
     <string name="tracker"> <font color="@color/black">You and</font> Claire <font color="@color/black">have been married for</font></string>
+
+    <string name="days">%1$d days</string>
 </resources>
