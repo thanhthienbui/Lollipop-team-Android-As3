@@ -25,10 +25,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <activity
-            android:name=".GiftPageActivity"
+            android:name=".MapActivity"
             android:exported="false" />
         <activity
-            android:name=".MapActivity"
+            android:name=".GiftPageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
